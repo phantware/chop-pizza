@@ -1,9 +1,10 @@
 import styles from '../styles/Featured.module.css'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 const Featured = () => {
   const [index, setIndex] = useState(0)
+
   const images = [
     '/img/italian.png',
     '/img/pizza-2.png',
@@ -11,14 +12,31 @@ const Featured = () => {
     '/img/featured4-2.png',
   ]
 
-  const handleArrow = (direction) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleArrow = useCallback((direction) => {
     if (direction === 'l') {
       setIndex(index !== 0 ? index - 1 : 3)
     }
     if (direction === 'r') {
       setIndex(index !== 3 ? index + 1 : 0)
     }
-  }
+  })
+  useEffect(() => {
+    const lastIndex = 3
+    if (index < 0) {
+      setIndex(lastIndex)
+    }
+    if (index > lastIndex) {
+      setIndex(0)
+    }
+  }, [index, handleArrow])
+
+  useEffect(() => {
+    const slider = setInterval(() => {
+      setIndex(index + 1)
+    }, 3000)
+    return () => clearInterval(slider)
+  }, [index])
 
   return (
     <div className={styles.container}>
