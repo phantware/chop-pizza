@@ -1,11 +1,14 @@
 import styles from '../styles/Navbar.module.css'
 import Image from 'next/image'
+import Link from 'next/link'
 const Navbar = () => {
   return (
     <div className={styles.container}>
       <div className={styles.item}>
         <div className={styles.callButton}>
-          <Image src='/img/telephone.png' width='32' height='32' alt='' />
+          <Link href='tel:+2348187273154'>
+            <Image src='/img/telephone.png' width='32' height='32' alt='' />
+          </Link>
         </div>
         <div className={styles.texts}>
           <div className={styles.text}>ORDER NOW!</div>
