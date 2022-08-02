@@ -12,6 +12,7 @@ const Cart = () => {
   const [loader, setLoader] = useState(true)
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
+  const [open, setOpen] = useState(false)
 
   // This values are the props in the UI
   const amount = '2'
@@ -137,18 +138,23 @@ const Cart = () => {
             <div className={styles.totalText}>
               <b className={styles.totalTextTitle}>Total:</b>${cart.total}
             </div>
-            <button className={styles.button}>CHECKOUT NOW!</button>
 
-            <PayPalScriptProvider
-              options={{
-                'client-id': 'test',
-                components: 'buttons',
-                currency: 'USD',
-                'disable-funding': 'credit,card,p24',
-              }}
-            >
-              <ButtonWrapper currency={currency} showSpinner={false} />
-            </PayPalScriptProvider>
+            {open ? (
+              <PayPalScriptProvider
+                options={{
+                  'client-id': 'test',
+                  components: 'buttons',
+                  currency: 'USD',
+                  'disable-funding': 'credit,card,p24',
+                }}
+              >
+                <ButtonWrapper currency={currency} showSpinner={false} />
+              </PayPalScriptProvider>
+            ) : (
+              <button className={styles.button} onClick={() => setOpen(true)}>
+                CHECKOUT NOW!
+              </button>
+            )}
           </div>
         </div>
       </div>
