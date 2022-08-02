@@ -140,16 +140,19 @@ const Cart = () => {
             </div>
 
             {open ? (
-              <PayPalScriptProvider
-                options={{
-                  'client-id': 'test',
-                  components: 'buttons',
-                  currency: 'USD',
-                  'disable-funding': 'credit,card,p24',
-                }}
-              >
-                <ButtonWrapper currency={currency} showSpinner={false} />
-              </PayPalScriptProvider>
+              <div className={styles.paymentMethods}>
+                <button className={styles.payButton}>CASH ON DELIVERY</button>
+                <PayPalScriptProvider
+                  options={{
+                    'client-id': 'test',
+                    components: 'buttons',
+                    currency: 'USD',
+                    'disable-funding': 'credit,card,p24',
+                  }}
+                >
+                  <ButtonWrapper currency={currency} showSpinner={false} />
+                </PayPalScriptProvider>
+              </div>
             ) : (
               <button className={styles.button} onClick={() => setOpen(true)}>
                 CHECKOUT NOW!
