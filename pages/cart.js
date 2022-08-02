@@ -61,7 +61,8 @@ const Cart = () => {
               })
           }}
           onApprove={function (data, actions) {
-            return actions.order.capture().then(function () {
+            return actions.order.capture().then(function (details) {
+              console.log('details', details)
               // Your code here after capture the order
             })
           }}
@@ -144,7 +145,8 @@ const Cart = () => {
                 <button className={styles.payButton}>CASH ON DELIVERY</button>
                 <PayPalScriptProvider
                   options={{
-                    'client-id': 'test',
+                    'client-id':
+                      'AdFGfDPWas9JqQb3tPREsqVhJSgbQa0lKyLFJBw_AtsTDWDl5re_wVXutu2LRZBv9hTM8tYTK57DArSZ',
                     components: 'buttons',
                     currency: 'USD',
                     'disable-funding': 'credit,card,p24',
