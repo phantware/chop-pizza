@@ -10,6 +10,7 @@ import {
   PayPalButtons,
   usePayPalScriptReducer,
 } from '@paypal/react-paypal-js'
+import OrderDetailed from '../components/OrderDetailed'
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart)
@@ -193,6 +194,7 @@ const Cart = () => {
             )}
           </div>
         </div>
+        {cash && <OrderDetailed total={cart.total} createOrder={createOrder} />}
       </div>
     )
 }
