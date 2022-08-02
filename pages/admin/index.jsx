@@ -3,7 +3,21 @@ import Image from 'next/image'
 import { useState } from 'react'
 import styles from '../../styles/Admin.module.css'
 
-const Index = () => {
+const Index = ({ orders, products }) => {
+  const [pizzaList, setPizzaList] = useState(products)
+  const [orderList, setOrderList] = useState(orders)
+  const status = ['preparing', 'on the way', 'delivered']
+
+  const handleDelete = async (id) => {
+    console.log(id)
+    try {
+      const res = await axios.delete('http://localhost:3000/api/products/' + id)
+      setPizzaList(pizzaList.filter((pizza) => pizza._id !== id))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.item}>
@@ -60,7 +74,7 @@ const Index = () => {
               <th>Action</th>
             </tr>
           </tbody>
-          {orderList.map((order) => (
+          {orders.map((order) => (
             <tbody key={order._id}>
               <tr className={styles.trTitle}>
                 <td>{order._id.slice(0, 5)}...</td>
@@ -69,7 +83,7 @@ const Index = () => {
                 <td>
                   {order.method === 0 ? <span>cash</span> : <span>paid</span>}
                 </td>
-                <td>{status[order.status]}</td>
+                {/* <td>{status[order.status]}</td> */}
                 <td>
                   <button onClick={() => handleStatus(order._id)}>
                     Next Stage
@@ -84,4 +98,15 @@ const Index = () => {
   )
 }
 
+export const getServerSideProps = async () => {
+  const productRes = await axios.get('http://localhost:3000/api/products')
+  const orderRes = await axios.get('http://localhost:3000/api/orders')
+
+  return {
+    props: {
+      orders: orderRes.data,
+      products: productRes.data,
+    },
+  }
+}
 export default Index
