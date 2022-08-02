@@ -15,6 +15,8 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart)
   const [loader, setLoader] = useState(true)
   const [open, setOpen] = useState(false)
+  const [cash, setCash] = useState(false)
+
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -47,6 +49,7 @@ const Cart = () => {
           currency: currency,
         },
       })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currency, showSpinner])
 
     return (
@@ -165,7 +168,12 @@ const Cart = () => {
 
             {open ? (
               <div className={styles.paymentMethods}>
-                <button className={styles.payButton}>CASH ON DELIVERY</button>
+                <button
+                  className={styles.payButton}
+                  onClick={() => setCash(true)}
+                >
+                  CASH ON DELIVERY
+                </button>
                 <PayPalScriptProvider
                   options={{
                     'client-id':
