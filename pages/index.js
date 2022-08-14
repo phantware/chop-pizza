@@ -4,8 +4,12 @@ import Featured from '../components/Featured'
 import ProductList from '../components/ProductList'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
+import { useState } from 'react'
+import Add from '../components/Add'
+import AddButton from '../components/AddButton'
 
 export default function Home({ productList, admin }) {
+  const [close, setClose] = useState(true)
   return (
     <div className={styles.container}>
       <Head>
@@ -17,8 +21,9 @@ export default function Home({ productList, admin }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Featured />
-
+      {admin && <AddButton setClose={setClose} />}
       <ProductList productList={productList} />
+      {!close && <Add setClose={setClose} />}
     </div>
   )
 }
