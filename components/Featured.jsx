@@ -9,7 +9,7 @@ const Featured = () => {
     '/img/italian.png',
     '/img/pizza-2.png',
     '/img/eat-2.png',
-    '/img/featured4-2.png',
+    '/img/featured4.png',
   ]
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

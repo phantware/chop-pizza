@@ -1,9 +1,8 @@
 import cookie from 'cookie'
 
-const handler = (res, req) => {
+const handler = (req, res) => {
   if (req.method === 'POST') {
     const { username, password } = req.body
-
     if (
       username === process.env.ADMIN_USERNAME &&
       password === process.env.ADMIN_PASSWORD
@@ -16,9 +15,9 @@ const handler = (res, req) => {
           path: '/',
         })
       )
-      res.statu(200).json('Successful')
+      res.status(200).json('Succesfull')
     } else {
-      res.statu(400).json('Wrong Credentials')
+      res.status(400).json('Wrong Credentials!')
     }
   }
 }
