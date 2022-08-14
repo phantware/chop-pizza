@@ -102,7 +102,7 @@ const Product = ({ pizza }) => {
 
 export const getServerSideProps = async ({ params }) => {
   const res = await axios.get(
-    `https://chop-pizza.netlify.app/products/${params.id}`
+    `https://chop-pizza.netlify.app/api/products/${params.id}`
   )
   return {
     props: {

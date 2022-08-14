@@ -11,7 +11,7 @@ const Login = () => {
 
   const handleClick = async () => {
     try {
-      await axios.post('https://chop-pizza.netlify.app/login', {
+      await axios.post('https://chop-pizza.netlify.app/api/login', {
         username,
         password,
       })
