@@ -8,7 +8,7 @@ import { useState } from 'react'
 import Add from '../components/Add'
 import AddButton from '../components/AddButton'
 
-export default function Home({ productList, admin }) {
+export default function Home({ productList, admin, myCookie }) {
   const [close, setClose] = useState(true)
   return (
     <div className={styles.container}>
@@ -23,7 +23,7 @@ export default function Home({ productList, admin }) {
       <Featured />
       {<AddButton setClose={setClose} />}
       <ProductList productList={productList} />
-      {!close && <Add setClose={setClose} />}
+      {!close && <Add setClose={setClose} cookies={myCookie} />}
     </div>
   )
 }
@@ -41,6 +41,7 @@ export const getServerSideProps = async (ctx) => {
     props: {
       productList: res.data,
       admin,
+      myCookie,
     },
   }
 }
